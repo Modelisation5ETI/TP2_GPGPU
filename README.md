@@ -8,17 +8,17 @@
 -----
   - Out-of-source build :
  ```
- git clone git@github.com:Modelisation5ETI/TP2_GPGPU.git && \ 
- mkdir TP2_GPGPU-build && cd TP2_GPGPU-build  && \ 
- cmake ../TP2_GPGPU  && \ 
- make -j
+git clone git@github.com:Modelisation5ETI/TP2_GPGPU.git && \
+mkdir TP2_GPGPU-build && cd TP2_GPGPU-build  && \
+cmake ../TP2_GPGPU  && \
+make -j
  
  ```
   - QtCreator :
  ```
- git clone git@github.com:Modelisation5ETI/TP2_GPGPU.git  && \ 
- mkdir TP2_GPGPU-build && cd TP2_GPGPU-build  && \ 
- qtcreator ../TP2_GPGPU/CMakeLists.txt  
+git clone git@github.com:Modelisation5ETI/TP2_GPGPU.git  && \
+mkdir TP2_GPGPU-build && cd TP2_GPGPU-build  && \
+qtcreator ../TP2_GPGPU/CMakeLists.txt
  
  ```
   *Then configure project using QtCreator API* : 
