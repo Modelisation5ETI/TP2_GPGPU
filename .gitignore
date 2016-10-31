@@ -15,7 +15,7 @@ CTestTestfile.cmake
 *.slo
 *.lo
 *.o
-*.obj
+
 
 # Precompiled Headers
 *.gch
