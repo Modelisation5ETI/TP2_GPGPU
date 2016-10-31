@@ -41,9 +41,15 @@ qtcreator ../TP2_GPGPU/CMakeLists.txt
  Use arrows to move the point where particles converge.
  
  - ### Image simple
+
+ <img src="./contour.png" alt="SobelFilter" width="200" height="100" />
+ <br></br>
+   
+   
+ 
  ```
  ./ImageSimple_
- ```
+ ``` 
  Process image filters on GPU.
  
  Use [0,1,2,3,4] keys to process different filters.
