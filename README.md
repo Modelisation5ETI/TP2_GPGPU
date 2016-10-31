@@ -32,6 +32,8 @@ qtcreator ../TP2_GPGPU
 -----
 
  - ### Transform Feedback
+ <img src="./Screenshots/TF_particle.png" alt="FBO" width="200" height="200" />
+
  ```
  ./TransformFeedback_
  ```
@@ -41,14 +43,10 @@ qtcreator ../TP2_GPGPU
  Use arrows to move the point where particles converge.
  
  - ### Image simple
-
  <img src="./Screenshots/contour.png" alt="SobelFilter" width="200" height="100" />
  <img src="./Screenshots/blur.png" alt="Blur" width="200" height="100" />
  <img src="./Screenshots/sat1.png" alt="Saturation" width="200" height="100" />
  <img src="./Screenshots/threshold.png" alt="Threshold" width="200" height="100" />
- <br></br>
-   
-   
  
  ```
  ./ImageSimple_
@@ -60,6 +58,8 @@ qtcreator ../TP2_GPGPU
  Use arrow UP or DOWN to change the filter parameter.
 
  - ### Frame Buffer Object
+ <img src="./Screenshots/FBO_tv.png" alt="FBO" width="200" height="150" />
+
  ```
  ./FrameBufferObject_
  ```
