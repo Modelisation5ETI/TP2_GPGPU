@@ -119,7 +119,7 @@ static void keyboard_callback(unsigned char key, int, int)
     case 27:
       exit(0);
       break;
-    // shaderID selection
+    // shaderID selection   ##TODO: Improve using glUseProgram
     case '0'://Contrast (Default)
       program = read_shader("shader.vert", "shader.frag", {"position", "tex_coord"});
       shaderID = threshold;

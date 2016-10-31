@@ -10,6 +10,8 @@
 
 #include "image.h"
 
+#include "Project_Config.h"
+
 struct TextureTGA
 {
   TextureTGA();

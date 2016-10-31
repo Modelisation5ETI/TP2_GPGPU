@@ -39,7 +39,7 @@ static void init()
   // Load particle texture
   Image  *image;
   GLuint  texName;
-  image = image_load_tga("data/particle_cloud.tga");
+  image = image_load_tga("particle_cloud.tga");
   if (image)
   {
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);                               PRINT_OPENGL_ERROR();
@@ -61,14 +61,14 @@ static void init()
   vec3 positions[NB_PARTICULES]; // Initial positions array
   const char *varyings[2] = { "v_position", "v_vitesse" };// Transform feedback varyings
 
-  program_tf = read_shader("data/tf.vert", "data/tf.frag");
+  program_tf = read_shader("tf.vert", "tf.frag");
   glTransformFeedbackVaryings(program_tf, 2, varyings, GL_SEPARATE_ATTRIBS); PRINT_OPENGL_ERROR();
   glBindAttribLocation(program_tf, 0, "position");                           PRINT_OPENGL_ERROR();
   glBindAttribLocation(program_tf, 1, "vitesse");                            PRINT_OPENGL_ERROR();
   glBindAttribLocation(program_tf, 2, "random_seed");                            PRINT_OPENGL_ERROR();
   glLinkProgram(program_tf);                                                 PRINT_OPENGL_ERROR();
 
-  program = read_shader("data/shader.vert", "data/shader.geom", "data/shader.frag", {"position"});
+  program = read_shader("shader.vert", "shader.geom", "shader.frag", {"position"});
   glUniform1i (get_uni_loc(program, "text"), 0); PRINT_OPENGL_ERROR();
   glLinkProgram(program);                       PRINT_OPENGL_ERROR();
   

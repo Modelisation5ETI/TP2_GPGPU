@@ -18,7 +18,9 @@ void TextureTGA::Load( int width, int height, const GLvoid * data)
   
 void TextureTGA::Load( const std::string &filename )
 {
-  Image *image = image_load_tga( filename );
+  std::string data_dir = DATA_DIR;
+  data_dir.append( "/" );
+  Image *image = image_load_tga( data_dir.append( filename ) );
   if( image )
     {
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);                              PRINT_OPENGL_ERROR();

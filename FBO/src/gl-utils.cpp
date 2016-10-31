@@ -115,6 +115,10 @@ static std::string get_file_content(const std::string &filename)
       ret += std::string(buf, buf + len);
     fclose(fp);
   }
+  else
+  {
+  std::cout<<"Couldn't find "<<filename.c_str()<<std::endl;
+  }
   return ret;
 }
 
@@ -132,35 +136,38 @@ GLuint read_shader(const std::string &vertex_filename,
 
   program = glCreateProgram(); PRINT_OPENGL_ERROR();
 
+  std::string shader_dir = SHADER_DIR;
+  shader_dir.append( "/" );
+  
   // Create the vertex shader.
   if (vertex_filename != "")
-    {
-      GLuint handle = glCreateShader(GL_VERTEX_SHADER); PRINT_OPENGL_ERROR();
-      source = get_file_content(vertex_filename);
-      cstring = source.c_str();
-      glShaderSource(handle, 1, &cstring, NULL);   PRINT_OPENGL_ERROR();
-      // Compile the vertex shader, and print out the compiler log file.
-      glCompileShader(handle); PRINT_OPENGL_ERROR();
-      glGetShaderiv(handle, GL_COMPILE_STATUS, &status); PRINT_OPENGL_ERROR();
-      print_shader_info_log(handle);
-      glAttachShader(program, handle); PRINT_OPENGL_ERROR();
-      if (!status) return 0;
-    }
+  {
+    GLuint handle = glCreateShader(GL_VERTEX_SHADER); PRINT_OPENGL_ERROR();
+    source = get_file_content( shader_dir + vertex_filename );
+    cstring = source.c_str();
+    glShaderSource(handle, 1, &cstring, NULL);   PRINT_OPENGL_ERROR();
+    // Compile the vertex shader, and print out the compiler log file.
+    glCompileShader(handle); PRINT_OPENGL_ERROR();
+    glGetShaderiv(handle, GL_COMPILE_STATUS, &status); PRINT_OPENGL_ERROR();
+    print_shader_info_log(handle);
+    glAttachShader(program, handle); PRINT_OPENGL_ERROR();
+    if (!status) return 0;
+  }
 
   // Create the fragment shader
   if (fragment_filename != "")
-    {
-      GLuint handle = glCreateShader(GL_FRAGMENT_SHADER); PRINT_OPENGL_ERROR();
-      source = get_file_content(fragment_filename);
-      cstring = source.c_str();
-      glShaderSource(handle, 1, &cstring, NULL); PRINT_OPENGL_ERROR();
-      // Compile the fragment shader, and print out the compiler log file.
-      glCompileShader(handle); PRINT_OPENGL_ERROR();
-      glGetShaderiv(handle, GL_COMPILE_STATUS, &status); PRINT_OPENGL_ERROR();
-      print_shader_info_log(handle);
-      glAttachShader(program, handle); PRINT_OPENGL_ERROR();
-      if (!status) return 0;
-    }
+  {
+    GLuint handle = glCreateShader(GL_FRAGMENT_SHADER); PRINT_OPENGL_ERROR();
+    source = get_file_content( shader_dir + fragment_filename );
+    cstring = source.c_str();
+    glShaderSource(handle, 1, &cstring, NULL); PRINT_OPENGL_ERROR();
+    // Compile the fragment shader, and print out the compiler log file.
+    glCompileShader(handle); PRINT_OPENGL_ERROR();
+    glGetShaderiv(handle, GL_COMPILE_STATUS, &status); PRINT_OPENGL_ERROR();
+    print_shader_info_log(handle);
+    glAttachShader(program, handle); PRINT_OPENGL_ERROR();
+    if (!status) return 0;
+  }
 
   for (unsigned i = 0; i < attributes.size(); i++)
   {

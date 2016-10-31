@@ -10,6 +10,8 @@
 #include <GL/glew.h>
 #include <GL/gl.h>
 
+#include "Project_Config.h"
+
 #define BUFFER_OFFSET(bytes) ((GLubyte*) NULL + (bytes))
 #define PRINT_OPENGL_ERROR() print_opengl_error(__FILE__, __LINE__)
 

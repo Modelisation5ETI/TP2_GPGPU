@@ -70,7 +70,7 @@ static void print_shader_info_log(GLuint shader)
 /*****************************************************************************\
  * print_program_info_log                                                    *
 \*****************************************************************************/
-void print_program_info_log(GLuint program)
+static void print_program_info_log(GLuint program)
 {
   int     info_log_length = 0;
   int     chars_written  = 0;
@@ -122,7 +122,8 @@ static std::string get_file_content(const std::string &filename)
  * read_shader                                                               *
 \*****************************************************************************/
 GLuint read_shader(const std::string &vertex_filename,
-                   const std::string &fragment_filename)
+                   const std::string &fragment_filename,
+                   const std::vector<std::string> &attributes)
 {
   GLint        status;
   std::string  source;
@@ -131,11 +132,14 @@ GLuint read_shader(const std::string &vertex_filename,
 
   program = glCreateProgram(); PRINT_OPENGL_ERROR();
 
+  std::string shader_dir = SHADER_DIR;
+  shader_dir.append( "/" );
+  
   // Create the vertex shader.
   if (vertex_filename != "")
     {
       GLuint handle = glCreateShader(GL_VERTEX_SHADER); PRINT_OPENGL_ERROR();
-      source = get_file_content(vertex_filename);
+      source = get_file_content( shader_dir + vertex_filename );
       cstring = source.c_str();
       glShaderSource(handle, 1, &cstring, NULL);   PRINT_OPENGL_ERROR();
       // Compile the vertex shader, and print out the compiler log file.
@@ -150,7 +154,7 @@ GLuint read_shader(const std::string &vertex_filename,
   if (fragment_filename != "")
     {
       GLuint handle = glCreateShader(GL_FRAGMENT_SHADER); PRINT_OPENGL_ERROR();
-      source = get_file_content(fragment_filename);
+      source = get_file_content( shader_dir + fragment_filename );
       cstring = source.c_str();
       glShaderSource(handle, 1, &cstring, NULL); PRINT_OPENGL_ERROR();
       // Compile the fragment shader, and print out the compiler log file.
@@ -160,69 +164,6 @@ GLuint read_shader(const std::string &vertex_filename,
       glAttachShader(program, handle); PRINT_OPENGL_ERROR();
       if (!status) return 0;
     }
-
-  return program;
-}
-
-/*****************************************************************************\
- * read_shader                                                               *
-\*****************************************************************************/
-GLuint read_shader(const std::string &vertex_filename,
-                   const std::string &geometry_filename,
-                   const std::string &fragment_filename,
-                   const std::vector<std::string> &attributes)
-{
-  GLint        status;
-  std::string  source;
-  const char  *cstring;
-  GLuint       program;
-
-  program = glCreateProgram(); PRINT_OPENGL_ERROR();
-
-  // Create the vertex shader.
-  if (vertex_filename != "")
-  {
-    GLuint handle = glCreateShader(GL_VERTEX_SHADER); PRINT_OPENGL_ERROR();
-    source = get_file_content(vertex_filename);
-    cstring = source.c_str();
-    glShaderSource(handle, 1, &cstring, nullptr);   PRINT_OPENGL_ERROR();
-    // Compile the vertex shader, and print out the compiler log file.
-    glCompileShader(handle); PRINT_OPENGL_ERROR();
-    glGetShaderiv(handle, GL_COMPILE_STATUS, &status); PRINT_OPENGL_ERROR();
-    print_shader_info_log(handle);
-    glAttachShader(program, handle); PRINT_OPENGL_ERROR();
-    if (!status) return 0;
-  }
-
-  // Create the geometry shader.
-  if (geometry_filename != "")
-  {
-    GLuint handle = glCreateShader(GL_GEOMETRY_SHADER); PRINT_OPENGL_ERROR();
-    source = get_file_content(geometry_filename);
-    cstring = source.c_str();
-    glShaderSource(handle, 1, &cstring, nullptr);   PRINT_OPENGL_ERROR();
-    // Compile the vertex shader, and print out the compiler log file.
-    glCompileShader(handle); PRINT_OPENGL_ERROR();
-    glGetShaderiv(handle, GL_COMPILE_STATUS, &status); PRINT_OPENGL_ERROR();
-    print_shader_info_log(handle);
-    glAttachShader(program, handle); PRINT_OPENGL_ERROR();
-    if (!status) return 0;
-  }
-
-  // Create the fragment shader
-  if (fragment_filename != "")
-  {
-    GLuint handle = glCreateShader(GL_FRAGMENT_SHADER); PRINT_OPENGL_ERROR();
-    source = get_file_content(fragment_filename);
-    cstring = source.c_str();
-    glShaderSource(handle, 1, &cstring, nullptr); PRINT_OPENGL_ERROR();
-    // Compile the fragment shader, and print out the compiler log file.
-    glCompileShader(handle); PRINT_OPENGL_ERROR();
-    glGetShaderiv(handle, GL_COMPILE_STATUS, &status); PRINT_OPENGL_ERROR();
-    print_shader_info_log(handle);
-    glAttachShader(program, handle); PRINT_OPENGL_ERROR();
-    if (!status) return 0;
-  }
 
   for (unsigned i = 0; i < attributes.size(); i++)
   {
@@ -240,3 +181,4 @@ GLuint read_shader(const std::string &vertex_filename,
 
   return program;
 }
+

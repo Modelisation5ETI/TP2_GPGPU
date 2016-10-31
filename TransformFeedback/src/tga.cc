@@ -7,6 +7,9 @@
 
 #include "image.h"
 
+#include "Project_Config.h"
+
+
 /* Round up a division to the nearest integer. */
 #define ROUNDUP_DIVIDE(n,d) (((n) + (d - 1)) / (d))
 
@@ -87,7 +90,10 @@ image_load_tga (const std::string &filename)
   long           offset;
   Image         *image;
 
-  fp = fopen (filename.c_str (), "r");
+  std::string data_dir = DATA_DIR;
+  data_dir.append( "/" );
+  
+  fp = fopen( (data_dir + filename).c_str (), "r" );
   if (!fp)
     {
       printf ("Could not open '%s' for reading: %s\n", filename.c_str (), strerror (errno));

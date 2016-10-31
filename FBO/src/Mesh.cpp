@@ -20,7 +20,11 @@ void Mesh::LoadFromOBJ( const std::string filename )
   positions.push_back(vec3(0,0,0));
   normals.push_back(vec3(0,0,0));
   uvs.push_back(vec2(0,0));
-  std::ifstream file( filename );
+  
+  std::string data_dir = DATA_DIR;
+  data_dir.append( "/" );
+  std::ifstream file( data_dir + filename );
+  
   while (file)
     {
     std::string line, tag;
