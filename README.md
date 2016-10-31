@@ -18,7 +18,7 @@ make -j
  ```
 git clone git@github.com:Modelisation5ETI/TP2_GPGPU.git  && \
 mkdir TP2_GPGPU-build && cd TP2_GPGPU-build  && \
-qtcreator ../TP2_GPGPU/CMakeLists.txt
+qtcreator ../TP2_GPGPU
  
  ```
   *Then configure project using QtCreator API* : 
@@ -42,7 +42,10 @@ qtcreator ../TP2_GPGPU/CMakeLists.txt
  
  - ### Image simple
 
- <img src="./contour.png" alt="SobelFilter" width="200" height="100" />
+ <img src="./Screenshots/contour.png" alt="SobelFilter" width="200" height="100" />
+ <img src="./Screenshots/blur.png" alt="Blur" width="200" height="100" />
+ <img src="./Screenshots/sat1.png" alt="Saturation" width="200" height="100" />
+ <img src="./Screenshots/threshold.png" alt="Threshold" width="200" height="100" />
  <br></br>
    
    
